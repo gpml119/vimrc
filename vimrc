@@ -11,6 +11,8 @@ set showcmd
 
 set nowrapscan                  " / ? 不循环查找
 
+" 进入命令历史  q:
+
 " normal模式
 " >> 增加缩进
 " << 减少缩进 
@@ -316,8 +318,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-
 
 
 " vim 正则表达式
