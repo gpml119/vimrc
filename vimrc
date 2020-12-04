@@ -7,22 +7,25 @@ set relativenumber              " 显示相对行号
 set ruler                       " 右下角显示行列数
 
 set laststatus=2                " 总显示状态栏目
-set showcmd
+set showcmd                     " 在状态栏中显示最后执行的命令
+set cursorline                  " 高亮当前行
+
+set linebreak                   " 单词软换行
+set display+=lastline           " 较长的文本行漂亮显示
 
 set nowrapscan                  " / ? 不循环查找
 
 " 进入命令历史  q:
-
 " normal模式
 " >> 增加缩进
-" << 减少缩进 
-" '数字 >>' or '数字 <<'，指定作用的行数 
+" << 减少缩进
+" '数字 >>' or '数字 <<'，指定作用的行数
 
 " cindent smartindent autoindent 三种自动缩进
 set smartindent
 set expandtab                   " tab转换为空格
 set tabstop=4                   " tab宽度
-set shiftwidth=4                " 缩进宽度        
+set shiftwidth=4                " 缩进宽度
 set termguicolors               " 24bit color
 
 set mouse=a                     " 启用鼠标
@@ -50,9 +53,9 @@ colorscheme desert
 
 set colorcolumn=80              " 显示边界列
 
-" :vimgrep 模式 路径 
+" :vimgrep 模式 路径
 " :cn :cp 遍历所有匹配项目
-" :copen 打开QuickFix窗口 
+" :copen 打开QuickFix窗口
 
 " 复制yank
 " ye复制一个单词
@@ -64,11 +67,11 @@ set colorcolumn=80              " 显示边界列
 " 0-9寄存器表示最后10次操作历史
 " 只读寄存器 %当前文件名 #上次文件名 .最后插入文本 :最后执行命令
 " reg显示寄存器内容
-" 
+"
 " 字母命令寄存器a-z可以追加内容 使用大写字母 "Ayw
 "
 " 从外部复制文本到vim
-" * 系统主粘贴板 
+" * 系统主粘贴板
 " + ctrl + c / ctrl + v 复制
 
 set clipboard=unnamed,unnamedplus  " 复制到系统寄存器* +
@@ -80,7 +83,7 @@ endif
 set directory="$HOME/.vim/swap/"
 
 " 持久性撤销
-set undofile 
+set undofile
 if !isdirectory("$HOME/.vim/undodir")
     call mkdir($HOME . "/.vim/undodir", "p")
 endif
@@ -115,7 +118,7 @@ noremap <c-k> <c-w><c-k>
 
 
 " 折叠
-" zc 折叠代码 
+" zc 折叠代码
 " za zA 折叠状态切换
 " zR zM 打开 关闭所有
 "
@@ -140,9 +143,9 @@ silent! helptags ALL   " 为所有插件加载帮助文档
 
 
 
-" 检查是否右vim-plug没有就安装 
+" 检查是否右vim-plug没有就安装
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs 
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
         \https://raw.github.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -239,7 +242,7 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 " 撤销树
 " :GundoToggle
-Plug 'sjl/gundo.vim' 
+Plug 'sjl/gundo.vim'
 
 " vim git插件
 " :Gstatus :Glog :Gblame
@@ -259,6 +262,10 @@ Plug 'vim-airline/vim-airline'
 
 
 Plug 'vim-scripts/ScrollColors'
+
+" 高亮显示行尾空格
+" :FixWhitespace 自动删除
+Plug 'bronson/vim-trailing-whitespace'
 call plug#end()
 
 
@@ -336,10 +343,10 @@ let g:syntastic_check_on_wq = 0
 " \u 一个大写字母
 " \a 一个字母
 " 大写版本 表示反类
-" [a-z0-9]表示一个集合 
+" [a-z0-9]表示一个集合
 " [^a-z0-9] 一个集合的补集
 " \| 交替
-" \(\)分组 
+" \(\)分组
 "
 " mice hungint cat
 " 每个字符 无论是字面字符还是特殊字符 或 字符区间后面 都可以接一个量词
@@ -366,5 +373,4 @@ let g:syntastic_check_on_wq = 0
 " 特殊字符比较多时 使用
 " :s/\(cat\) hunging \(mice\)/\2 hunting \1
 " :s/\v(cat) hunging (mice)/\2 hunting \1
-"
 "
