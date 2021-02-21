@@ -1,5 +1,13 @@
 syntax on                       " 支持语法高亮
 
+set encoding=utf-8
+
+set fsync                       " 调用fsync()实现更健壮的文件保存
+
+set history=10000
+
+set sidescroll=1                " 更平滑的边侧滚动跳
+
 filetype plugin indent on       " 根据文件类型启用自动缩进
 
 set number                      " 显示行号
@@ -11,8 +19,13 @@ set showcmd                     " 在状态栏中显示最后执行的命令
 set cursorline                  " 高亮当前行
 
 set linebreak                   " 单词软换行
-set display+=lastline           " 较长的文本行漂亮显示
+if !has('nvim')
+    set display+=lastline
+else
+    set display=lastline,msgsep    " 较长的文本行漂亮显示 显示更多的文本消息
+endif
 
+set autoread                    " 从磁盘自动重载文件
 set nowrapscan                  " / ? 不循环查找
 
 " 进入命令历史  q:
@@ -30,7 +43,11 @@ set termguicolors               " 24bit color
 
 set mouse=a                     " 启用鼠标
 
-set backspace=2                 " 在多数终端上修正backspace行为
+" set backspace=2                 " 在多数终端上修正backspace行为
+set backspace=indent,eol,start  " 现代编辑器的退格问题
+
+set belloff=all                 " 禁用错误报警声
+set cscopeverbose               " 详细输出cscope结果
 
 set hlsearch                    " 高亮查找结果
 set incsearch                   " 增量查找
@@ -77,10 +94,10 @@ set colorcolumn=80              " 显示边界列
 set clipboard=unnamed,unnamedplus  " 复制到系统寄存器* +
 
 " 交换文件
-if !isdirectory("$HOME/.vim/swap")
-    call mkdir($HOME . "/.vim/swap", "p")
-endif
-set directory="$HOME/.vim/swap/"
+" if !isdirectory("$HOME/.vim/swap")
+"     call mkdir($HOME . "/.vim/swap", "p")
+" endif
+" set directory="$HOME/.vim/swap/"
 
 " 持久性撤销
 set undofile
@@ -122,7 +139,7 @@ noremap <c-k> <c-w><c-k>
 " za zA 折叠状态切换
 " zR zM 打开 关闭所有
 "
-set foldmethod=indent
+" set foldmethod=indent
 set foldcolumn=5
 
 " 命令补全
@@ -140,7 +157,6 @@ silent! helptags ALL   " 为所有插件加载帮助文档
 " :ls 列缓冲区
 " :b x 切换缓冲区
 " :bd 关闭缓冲区
-
 
 
 " 检查是否右vim-plug没有就安装
@@ -266,8 +282,14 @@ Plug 'vim-scripts/ScrollColors'
 " 高亮显示行尾空格
 " :FixWhitespace 自动删除
 Plug 'bronson/vim-trailing-whitespace'
+
+" 使用clang-format格式化代码
+Plug 'rhysd/vim-clang-format'
+
 call plug#end()
 
+" 格式化代码配置
+let g:clang_format#auto_format_on_insert_leave=1
 
 " YouCompleteMe
 noremap <leader>g :YcmCompleter GoTo<cr>
