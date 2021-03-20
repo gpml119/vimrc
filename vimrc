@@ -139,8 +139,8 @@ noremap <c-k> <c-w><c-k>
 " za zA 折叠状态切换
 " zR zM 打开 关闭所有
 "
-" set foldmethod=indent
-set foldcolumn=5
+set foldmethod=indent
+set foldcolumn=8
 
 " 命令补全
 set wildmenu                    " 启用增强的tab自动补全
@@ -251,8 +251,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/vim-plug'
 
 
-
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+
 
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
@@ -286,7 +286,24 @@ Plug 'bronson/vim-trailing-whitespace'
 " 使用clang-format格式化代码
 Plug 'rhysd/vim-clang-format'
 
+
+" Python autopep8 格式化
+Plug 'tell-k/vim-autopep8'
+
+" 缩进线
+Plug 'Yggdroot/indentline'
+
+" 暗黑主题
+Plug 'whatyouhide/vim-gotham'
+
+" python-mode
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+
 call plug#end()
+
+" 缩进线
+" let g:indentLine_char = '|'
+" let g:indentLine_enabled = 1
 
 " 格式化代码配置
 let g:clang_format#auto_format_on_insert_leave=1
@@ -319,7 +336,7 @@ let g:gundo_prefer_python3=1
 
 
 " 自动更新标签
-autocmd BufWritePost *.py silent! !ctags -R &
+" autocmd BufWritePost *.py silent! !ctags -R &
 autocmd BufWritePost *.cc silent! !ctags -R &
 autocmd BufWritePost *.c silent! !ctags -R &
 autocmd BufWritePost *.cpp silent! !ctags -R &
