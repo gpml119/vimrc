@@ -63,7 +63,8 @@ set smartcase
 " ctrl + f 补全文件名
 " s 基于拼写补全
 
-colorscheme desert
+" colorscheme solarized
+colorscheme hybrid
 
 " I'v been using vim for about 2 years now, mostly because I can't figure out
 " how to exit it.
@@ -139,8 +140,8 @@ noremap <c-k> <c-w><c-k>
 " za zA 折叠状态切换
 " zR zM 打开 关闭所有
 "
-set foldmethod=indent
-set foldcolumn=8
+" set foldmethod=indent
+" set foldcolumn=8
 
 " 命令补全
 set wildmenu                    " 启用增强的tab自动补全
@@ -181,6 +182,9 @@ endif
 let g:plug_timeout=300         " vim-plug超时时间
 
 call plug#begin()
+
+Plug 'altercation/vim-colors-solarized'
+Plug 'w0ng/vim-hybrid'
 
 " NERDTree 支持书签Bookmark
 " :Bookmark 收藏当前光标的目录到Bookmarks中
@@ -264,10 +268,10 @@ Plug 'sjl/gundo.vim'
 " :Gstatus :Glog :Gblame
 Plug 'tpope/vim-fugitive'
 
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 
-" Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Plug 'vim-syntastic/Syntastic'
 
@@ -297,9 +301,13 @@ Plug 'Yggdroot/indentline'
 Plug 'whatyouhide/vim-gotham'
 
 " python-mode
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
 call plug#end()
+
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++17'
 
 " 缩进线
 " let g:indentLine_char = '|'
@@ -337,10 +345,10 @@ let g:gundo_prefer_python3=1
 
 " 自动更新标签
 " autocmd BufWritePost *.py silent! !ctags -R &
-autocmd BufWritePost *.cc silent! !ctags -R &
-autocmd BufWritePost *.c silent! !ctags -R &
-autocmd BufWritePost *.cpp silent! !ctags -R &
-autocmd BufWritePost *.go silent! !ctags -R &
+" autocmd BufWritePost *.cc silent! !ctags -R &
+" autocmd BufWritePost *.c silent! !ctags -R &
+" autocmd BufWritePost *.cpp silent! !ctags -R &
+" autocmd BufWritePost *.go silent! !ctags -R &
 " autocmd BufWritePost *.js silent! !ctags -R &
 
 
@@ -360,10 +368,10 @@ auto filetype vue syntax sync fromstart
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 
 " vim 正则表达式
