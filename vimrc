@@ -1,59 +1,50 @@
+" I'v been using vim for about 2 years now, mostly because I can't figure out
+" how to exit it.
 syntax on                       " 支持语法高亮
-
+filetype plugin indent on       " 根据文件类型启用自动缩进
 set encoding=utf-8
 
 set fsync                       " 调用fsync()实现更健壮的文件保存
-
 set history=10000
-
 set sidescroll=1                " 更平滑的边侧滚动跳
-
-filetype plugin indent on       " 根据文件类型启用自动缩进
-
 set number                      " 显示行号
 set relativenumber              " 显示相对行号
 set ruler                       " 右下角显示行列数
-
 set laststatus=2                " 总显示状态栏目
 set showcmd                     " 在状态栏中显示最后执行的命令
 set cursorline                  " 高亮当前行
-
 set linebreak                   " 单词软换行
-if !has('nvim')
-    set display+=lastline
-else
-    set display=lastline,msgsep    " 较长的文本行漂亮显示 显示更多的文本消息
-endif
-
 set autoread                    " 从磁盘自动重载文件
 set nowrapscan                  " / ? 不循环查找
-
-" 进入命令历史  q:
-" normal模式
-" >> 增加缩进
-" << 减少缩进
-" '数字 >>' or '数字 <<'，指定作用的行数
-
 " cindent smartindent autoindent 三种自动缩进
 set smartindent
 set expandtab                   " tab转换为空格
 set tabstop=4                   " tab宽度
 set shiftwidth=4                " 缩进宽度
 set termguicolors               " 24bit color
-
 set mouse=a                     " 启用鼠标
-
-" set backspace=2                 " 在多数终端上修正backspace行为
+set backspace=2                 " 在多数终端上修正backspace行为
 set backspace=indent,eol,start  " 现代编辑器的退格问题
-
 set belloff=all                 " 禁用错误报警声
 set cscopeverbose               " 详细输出cscope结果
-
 set hlsearch                    " 高亮查找结果
 set incsearch                   " 增量查找
 set ignorecase
 set smartcase
+colorscheme hybrid
+set colorcolumn=80              " 显示边界列
 
+if !has('nvim')
+    set display+=lastline
+else
+    set display=lastline,msgsep    " 较长的文本行漂亮显示 显示更多的文本消息
+endif
+
+" 进入命令历史  q:
+" normal模式
+" >> 增加缩进
+" << 减少缩进
+" '数字 >>' or '数字 <<'，指定作用的行数
 
 " set spell                       " 基于拼写建议补全
 " vim插入补全模式
@@ -62,14 +53,6 @@ set smartcase
 " ctrl + j 补全标签
 " ctrl + f 补全文件名
 " s 基于拼写补全
-
-" colorscheme solarized
-colorscheme hybrid
-
-" I'v been using vim for about 2 years now, mostly because I can't figure out
-" how to exit it.
-
-set colorcolumn=80              " 显示边界列
 
 " :vimgrep 模式 路径
 " :cn :cp 遍历所有匹配项目
@@ -112,19 +95,6 @@ set undodir="$HOME/.vim/undofile"
 " :res +N -N        改变窗口大小
 " :vert res +N -N
 "
-" 窗口切换 重定义
-noremap <c-h> <c-w><c-h>
-noremap <c-l> <c-w><c-l>
-noremap <c-j> <c-w><c-j>
-noremap <c-k> <c-w><c-k>
-
-" 插入模式成对输入符号
-"inoremap ' ''<esc>i
-"inoremap " ""<esc>i
-"inoremap ( ()<esc>i
-"inoremap { {}<esc>i
-"inoremap [ []<esc>i
-
 " visual mode 按o可以在2端跳
 " R 进入替换模式
 
@@ -133,7 +103,6 @@ noremap <c-k> <c-w><c-k>
 " gt=:tabn gT=:tabp
 " tabmove N 标签移动
 " tabclose 关闭标签
-
 
 " 折叠
 " zc 折叠代码
@@ -147,7 +116,6 @@ noremap <c-k> <c-w><c-k>
 set wildmenu                    " 启用增强的tab自动补全
 set wildmode=list:longest,full  " 补全为运行的最长字符串，然后打开wildmenu
 
-set tags=tags;                  " 在父目录中递归查找tags文件
 " ctrl + ] 跳转到函数的定义
 
 " 插件目录 .vim/pack/plugins/start .vim/pack/plugins/opt
@@ -182,10 +150,10 @@ endif
 let g:plug_timeout=300         " vim-plug超时时间
 
 call plug#begin()
-
-Plug 'altercation/vim-colors-solarized'
+" 自动补全
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" 主题
 Plug 'w0ng/vim-hybrid'
-
 " NERDTree 支持书签Bookmark
 " :Bookmark 收藏当前光标的目录到Bookmarks中
 " :ClearBookmarks xx xx 清除
@@ -221,103 +189,78 @@ Plug 'w0ng/vim-hybrid'
 " A: 全屏显示NERDTree，或者关闭全屏"
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-
+Plug 'scrooloose/nerdcommenter'
 " JavaScript格式化器
 " :call JsBeautify()
 " :call JsonBeautify()
 " :call JsxBeautify()
 " :call HtmlBeautify()
 " :call CSSBeautify()
-Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript'}
-
-
+"Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript'}
 " 增加 - 符号 用于目录浏览
-Plug 'tpope/vim-vinegar'
-
+"Plug 'tpope/vim-vinegar'
 " 模糊补全插件
 " ctrl + p 窗口出现
 " ctrl + j / k遍历列表
 " ctrl + b / f file mru buffer 间切换
 " :CtrlPBuffer :CtrlPMRU :CtrlPMixed
 Plug 'ctrlpvim/ctrlp.vim'
-
-
 " ack.vim 需linux ack 配合使用 用于搜索代码库
 " Plug 'mileszs/ack.vim'
-
 " \\先导键
 " w右一个狭义单词 W右一个广义单词
 " b左一个狭义单词 B左一个广义单词
 Plug 'easymotion/vim-easymotion'
-
-
 " :help vim-plug需要
 Plug 'junegunn/vim-plug'
-
-
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
-
-
-Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
-
+"Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 " 撤销树
 " :GundoToggle
-Plug 'sjl/gundo.vim'
-
+"Plug 'sjl/gundo.vim'
 " vim git插件
 " :Gstatus :Glog :Gblame
 Plug 'tpope/vim-fugitive'
-
 " Plug 'posva/vim-vue'
-
 Plug 'junegunn/fzf', {'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
-" Plug 'vim-syntastic/Syntastic'
-
-Plug 'W0rp/ale'
-
 " 自定义状态栏
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-
-Plug 'vim-scripts/ScrollColors'
-
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/gv.vim'
 " 高亮显示行尾空格
 " :FixWhitespace 自动删除
 Plug 'bronson/vim-trailing-whitespace'
-
 " 使用clang-format格式化代码
 Plug 'rhysd/vim-clang-format'
-
-
 " Python autopep8 格式化
 Plug 'tell-k/vim-autopep8'
-
 " 缩进线
 Plug 'Yggdroot/indentline'
-
-" 暗黑主题
-Plug 'whatyouhide/vim-gotham'
-
 " python-mode
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" 源文件和头文件切换
+Plug 'vim-scripts/a.vim'
+Plug 'voldikss/vim-floaterm'
 
+Plug 'mhinz/vim-startify'
 call plug#end()
 
-
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++17'
-
-" 缩进线
-" let g:indentLine_char = '|'
-" let g:indentLine_enabled = 1
-
+" airline配置
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#whitespace#enabled=0
+set t_Co=256
+set lazyredraw
+let g:airline_theme='powerlineish'
+" 使用powerline打过补丁的字体
+let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+    let g:airline_symbols={}
+endif
+"
 " 格式化代码配置
-let g:clang_format#auto_format_on_insert_leave=1
-
-" YouCompleteMe
-noremap <leader>g :YcmCompleter GoTo<cr>
+let g:clang_format#auto_format=1
 
 let NERDTreeShowBookmarks=1    " 显示书签
 let NERDTreeShowLineNumbers=1  " 显示行号
@@ -335,44 +278,55 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
-autocmd VimEnter * NERDTree    " 自动启动NERDTree
+" 窗口切换 重定义
+noremap <c-h> <c-w><c-h>
+noremap <c-l> <c-w><c-l>
+noremap <c-j> <c-w><c-j>
+noremap <c-k> <c-w><c-k>
+
+" 重命名和重构
+nmap ,rn <Plug>(coc-rename)
+nmap ,rf <Plug>(coc-refactor)
+
+" 插入模式成对输入符号
+inoremap ' ''<esc>i
+inoremap " ""<esc>i
+inoremap ( ()<esc>i
+inoremap { {}<esc>i
+inoremap [ []<esc>i
+
+" 树形目录
+nmap ,l :NERDTreeFind<cr>
+nmap ,g :NERDTreeToggle<cr>
+
+" 文件模糊查找
+nmap ,f :FZF<cr>
+
+" 悬浮终端
+nmap ,t :FloatermToggle<cr>
+
+" 头文件切换
+nmap ,a :A<cr>
+
+let g:startify_files_number = 20
+let g:startify_session_autoload = 1
+
+" autocmd VimEnter * NERDTree    " 自动启动NERDTree
 " 当NERDTree窗口是最后一个窗口时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") &&
             \ b:NERDTree.isTabTree()) | q | endif
 
 let g:gundo_prefer_python3=1
 
-
-" 自动更新标签
-" autocmd BufWritePost *.py silent! !ctags -R &
-" autocmd BufWritePost *.cc silent! !ctags -R &
-" autocmd BufWritePost *.c silent! !ctags -R &
-" autocmd BufWritePost *.cpp silent! !ctags -R &
-" autocmd BufWritePost *.go silent! !ctags -R &
-" autocmd BufWritePost *.js silent! !ctags -R &
-
-
 " for vue
-autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set tabstop=2
-autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set softtabstop=2
-autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set shiftwidth=2
-autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set expandtab
-autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set autoindent
-autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set fileformat=unix
+"autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set tabstop=2
+"autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set softtabstop=2
+"autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set shiftwidth=2
+"autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set expandtab
+"autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set autoindent
+"autocmd BufNewFile,BufRead *.html,*.js,*.ts,*.vue set fileformat=unix
 
-auto filetype vue syntax sync fromstart
-"let g:syntastic_javascript_checkers=['eslint']
-"let g:syntastic_typescript_checkers=['eslint']
-
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
+"auto filetype vue syntax sync fromstart
 
 " vim 正则表达式
 " vim中除了.和*外，其他的特殊字符都需要\转义
@@ -420,4 +374,5 @@ auto filetype vue syntax sync fromstart
 " 特殊字符比较多时 使用
 " :s/\(cat\) hunging \(mice\)/\2 hunting \1
 " :s/\v(cat) hunging (mice)/\2 hunting \1
-"
+set path=.
+set path+=/usr/local/include/c++/10.2.0
