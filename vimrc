@@ -245,7 +245,27 @@ Plug 'vim-scripts/a.vim'
 Plug 'voldikss/vim-floaterm'
 
 Plug 'mhinz/vim-startify'
+Plug 'preservim/tagbar'
+
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
+Plug 'suan/vim-instant-markdown'
 call plug#end()
+
+"let g:vim_markdown_math = 1
+"let g:vim_markdown_auto_extension_ext ='txt'
+"let g:vim_markdown_no_default_key_mappings = 1
+"let g:vim_markdown_folding_disabled = 1
+
+"let g:vim_markdown_folding_style_pythonic = 1
+"let g:vim_markdown_override_foldtext = 0
+
+"let g:vim_markdown_folding_level = 6
+"let g:vim_markdown_toc_autofit = 1
+"let g:vim_markdown_emphasis_multiline = 0
+"let g:vim_markdown_fenced_languages = ['csharp=cs']
+"let g:vim_markdown_strikethrough = 1
 
 " airline配置
 let g:airline#extensions#tabline#enabled=1
@@ -289,11 +309,11 @@ nmap ,rn <Plug>(coc-rename)
 nmap ,rf <Plug>(coc-refactor)
 
 " 插入模式成对输入符号
-inoremap ' ''<esc>i
-inoremap " ""<esc>i
-inoremap ( ()<esc>i
-inoremap { {}<esc>i
-inoremap [ []<esc>i
+"inoremap ' ''<esc>i
+"inoremap " ""<esc>i
+"inoremap ( ()<esc>i
+"inoremap { {}<esc>i
+"inoremap [ []<esc>i
 
 " 树形目录
 nmap ,l :NERDTreeFind<cr>
@@ -305,8 +325,15 @@ nmap ,f :FZF<cr>
 " 悬浮终端
 nmap ,t :FloatermToggle<cr>
 
+"tagbar
+nmap ,tag :TagbarToggle<cr>
+
 " 头文件切换
 nmap ,a :A<cr>
+
+" vim-markdown显示级别
+nmap ,mp :set cole=3<cr>
+nmap ,ms :set cole=0<cr>
 
 let g:startify_files_number = 20
 let g:startify_session_autoload = 1
