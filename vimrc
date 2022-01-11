@@ -405,5 +405,6 @@ let g:gundo_prefer_python3=1
 " 特殊字符比较多时 使用
 " :s/\(cat\) hunging \(mice\)/\2 hunting \1
 " :s/\v(cat) hunging (mice)/\2 hunting \1
-set path=.
-set path+=/usr/local/include/c++/10.2.0
+
+" set path=.
+" set path+=/usr/local/include/c++/10.2.0
