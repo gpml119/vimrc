@@ -109,7 +109,7 @@ set undodir="$HOME/.vim/undofile"
 " za zA 折叠状态切换
 " zR zM 打开 关闭所有
 "
-" set foldmethod=indent
+ set foldmethod=indent
 " set foldcolumn=8
 
 " 命令补全
@@ -251,6 +251,8 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 Plug 'suan/vim-instant-markdown'
+
+Plug 'luochen1990/rainbow'
 call plug#end()
 
 "let g:vim_markdown_math = 1
@@ -334,6 +336,8 @@ nmap ,a :A<cr>
 " vim-markdown显示级别
 nmap ,mp :set cole=3<cr>
 nmap ,ms :set cole=0<cr>
+
+nmap ,fw :FixWhitespace<cr>
 
 let g:startify_files_number = 20
 let g:startify_session_autoload = 1
