@@ -34,6 +34,7 @@ set smartcase
 colorscheme hybrid
 set colorcolumn=80              " 显示边界列
 
+
 if !has('nvim')
     set display+=lastline
 else
@@ -253,6 +254,10 @@ Plug 'plasticboy/vim-markdown'
 Plug 'suan/vim-instant-markdown'
 
 Plug 'luochen1990/rainbow'
+
+
+" debug
+Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-rust --enable-python'}
 call plug#end()
 
 "let g:vim_markdown_math = 1
@@ -408,3 +413,42 @@ let g:gundo_prefer_python3=1
 
 " set path=.
 " set path+=/usr/local/include/c++/10.2.0
+
+
+" <TAB> to select candicate forward or pump completion candicate
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+" <s-TAB> to select candicate backward
+inoremap <expr><s-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.')-1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+" <CR> to comfirm selected candidate
+" only when there's selected complete item
+if exists('*complete_info')
+  inoremap <silent><expr> <CR> complete_info(['selected'])['selected'] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if(index(['vim', 'help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
