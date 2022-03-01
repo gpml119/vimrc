@@ -270,17 +270,22 @@ call plug#end()
 "let g:vim_markdown_strikethrough = 1
 
 " airline配置
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#whitespace#enabled=0
-set t_Co=256
-set lazyredraw
-let g:airline_theme='powerlineish'
-" 使用powerline打过补丁的字体
-let g:airline_powerline_fonts=1
 if !exists('g:airline_symbols')
     let g:airline_symbols={}
 endif
-"
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+" 不使用默认字符
+let g:airline_symbols.linenr='|'
+let g:airline_symbols.maxlinenr='|'
+let g:airline_symbols.colnr='c:'
+let g:airline#extensions#tabline#enabled=1
+" let g:airline#extensions#whitespace#enabled=0
+set t_Co=256
+" set lazyredraw
+" 使用powerline打过补丁的字体
+" let g:airline_powerline_fonts=1
+
 " 格式化代码配置
 let g:clang_format#auto_format=1
 
