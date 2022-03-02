@@ -31,7 +31,7 @@ set hlsearch                    " 高亮查找结果
 set incsearch                   " 增量查找
 set ignorecase
 set smartcase
-colorscheme hybrid
+colorscheme solarized " hybrid
 set colorcolumn=80              " 显示边界列
 
 
@@ -155,6 +155,7 @@ call plug#begin()
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " 主题
 Plug 'w0ng/vim-hybrid'
+Plug 'altercation/vim-colors-solarized'
 " NERDTree 支持书签Bookmark
 " :Bookmark 收藏当前光标的目录到Bookmarks中
 " :ClearBookmarks xx xx 清除
@@ -415,10 +416,6 @@ let g:gundo_prefer_python3=1
 " 特殊字符比较多时 使用
 " :s/\(cat\) hunging \(mice\)/\2 hunting \1
 " :s/\v(cat) hunging (mice)/\2 hunting \1
-
-" set path=.
-" set path+=/usr/local/include/c++/10.2.0
-
 
 " <TAB> to select candicate forward or pump completion candicate
 inoremap <silent><expr> <TAB>
