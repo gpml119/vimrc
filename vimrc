@@ -28,7 +28,7 @@ set hlsearch                    " 高亮查找结果
 set incsearch                   " 增量查找
 set ignorecase
 set smartcase
-colorscheme solarized " hybrid
+colorscheme hybrid  " solarized
 set colorcolumn=80              " 显示边界列
 
 if !has('nvim')
@@ -114,7 +114,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " 主题
 Plug 'w0ng/vim-hybrid'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 
 " NERDTree文件浏览
 Plug 'scrooloose/nerdtree'
