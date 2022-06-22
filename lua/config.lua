@@ -4,6 +4,7 @@ require('packer').startup(
     function()
         use 'wbthomason/packer.nvim'
 
+        use 'williamboman/nvim-lsp-installer'
         use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
 
         use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
